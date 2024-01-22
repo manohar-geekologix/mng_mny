@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 const MnyMng = () => {
     const initValue = {
@@ -10,6 +10,10 @@ const MnyMng = () => {
     }
     const [formValue, setFormValue] = useState(initValue)
     const [calData, setCalData] = useState([])
+
+    useEffect(() => {
+        handleSubmit()
+    }, [])
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -22,20 +26,20 @@ const MnyMng = () => {
     }
 
     const handleSubmit = () => {
-        setCalData([])
+        setCalData([]);
         let amount = parseFloat(formValue.start_amount);
         let percent = parseFloat(formValue.percent);
         let step = parseFloat(formValue.step);
         let profit_percent = parseFloat(formValue.profit_percent);
-        let totalAmount = 0;
         let newData = [];
+        let totalLoss = 0;
 
         for (let i = 0;i < step;i++) {
-            amount = profit_percent * (amount + step * i) / percent;
-            totalAmount += amount;
-            newData.push({ amount: totalAmount });
+            totalLoss += amount;
+            amount = (profit_percent * totalLoss) / percent;
+            newData.push({ step: i + 1, amount: amount });
         }
-        setCalData(prevData => [...prevData, ...newData]);
+        setCalData(newData);
     };
 
     return (
