@@ -13,7 +13,7 @@ const MnyMng = () => {
 
     useEffect(() => {
         handleSubmit()
-    }, [])
+    })
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -143,7 +143,7 @@ const MnyMng = () => {
                                         </thead>
                                         <tbody class="border bg-orange-50">
                                             {calData.map((data, index) => (
-                                                <tr className="border">
+                                                <tr className="border" key={index}>
                                                     <td class="pl-4 border">
                                                         {index + 1}
                                                     </td>
