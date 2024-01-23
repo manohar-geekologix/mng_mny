@@ -11,9 +11,9 @@ const MnyMng = () => {
     const [formValue, setFormValue] = useState(initValue)
     const [calData, setCalData] = useState([])
 
-    // useEffect(() => {
-    //     handleSubmit()
-    // }, [])
+    useEffect(() => {
+        handleSubmit()
+    }, [])
 
     const handleChange = (e) => {
         const { name, value } = e.target
