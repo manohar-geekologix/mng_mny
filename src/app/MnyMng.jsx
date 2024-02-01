@@ -111,7 +111,7 @@ const MnyMng = () => {
                         />
                     </div>
                     <div className="flex gap-2">
-                        <button className="bg-orange-400 py-2 px-3 rounded-lg mb-[10px] font-medium" onClick={handleSubmit}>
+                        <button className="bg-sky-300 py-2 px-3 rounded-lg mb-[10px] font-medium" onClick={handleSubmit}>
                             Save
                         </button>
                         <button className="bg-gray-300 py-2 px-3 rounded-lg mb-[10px] font-medium" onClick={handleClear}>
@@ -124,24 +124,22 @@ const MnyMng = () => {
                 calData.length > 0 &&
                 <div className="bg-white border shadow-md p-4 my-3 mt-[35px] font-mono">
                     <h5>Result</h5>
-
-
                     <div class="flex flex-col mt-6">
-                        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                                 <div class="shadow overflow-hidden sm:rounded-lg">
                                     <table class="min-w-full text-sm">
-                                        <thead class="bg-gray-200 text-xs uppercase font-medium">
+                                        <thead class="bg-gray-50 text-xs uppercase font-medium">
                                             <tr>
                                                 <th scope="col" class="px-6 py-3 text-left tracking-wider border">
                                                     Step
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 text-left tracking-wider">
-                                                    Amount
+                                                    After loss next amount
                                                 </th>
                                             </tr>
                                         </thead>
-                                        <tbody class="border bg-orange-50">
+                                        <tbody class="border bg-sky-50">
                                             {calData.map((data, index) => (
                                                 <tr className="border" key={index}>
                                                     <td class="pl-4 border">
