@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react"
 
 const MnyMng = () => {
     const initValue = {
-        start_amount: 70,
+        start_amount: 100,
         percent: 85,
         step: 10,
-        profit_percent: 100
+        profit_percent: 0
     }
     const [formValue, setFormValue] = useState(initValue)
     const [calData, setCalData] = useState([])
@@ -36,7 +36,7 @@ const MnyMng = () => {
 
         for (let i = 0;i < step;i++) {
             totalLoss += amount;
-            amount = (profit_percent * totalLoss) / percent;
+            amount = ((profit_percent + 100) * totalLoss) / percent;
             newData.push({ step: i + 1, amount: amount });
         }
         setCalData(newData);
