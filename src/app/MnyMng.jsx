@@ -148,7 +148,7 @@ const MnyMng = () => {
                                                     <td
                                                         className="px-6 py-4 whitespace-nowrap cursor-pointer"
                                                         onClick={() => { navigator.clipboard.writeText((data.amount).toFixed(0)) }}
-                                                        title="click to copy"
+                                                        title="click to copy "
                                                     >
                                                         ₹ {(data.amount).toFixed(0)}
                                                     </td>
