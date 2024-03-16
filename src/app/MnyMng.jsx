@@ -34,7 +34,7 @@ const MnyMng = () => {
         let newData = [];
         let totalLoss = 0;
 
-        for (let i = 0;i < step;i++) {
+        for (let i = 0; i < step; i++) {
             totalLoss += amount;
             amount = ((profit_percent + 100) * totalLoss) / percent;
             newData.push({ step: i + 1, amount: amount });
@@ -145,8 +145,12 @@ const MnyMng = () => {
                                                     <td class="pl-4 border">
                                                         {index + 1}
                                                     </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        ₹{(data.amount).toFixed(0)}
+                                                    <td
+                                                        className="px-6 py-4 whitespace-nowrap cursor-pointer"
+                                                        onClick={() => { navigator.clipboard.writeText((data.amount).toFixed(0)) }}
+                                                        title="click to copy"
+                                                    >
+                                                        ₹ {(data.amount).toFixed(0)}
                                                     </td>
                                                 </tr>
                                             ))}
