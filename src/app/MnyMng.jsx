@@ -10,6 +10,7 @@ const MnyMng = () => {
     }
     const [formValue, setFormValue] = useState(initValue)
     const [calData, setCalData] = useState([])
+    const [copiedIndex, setCopiedIndex] = useState(null);
 
     useEffect(() => {
         handleSubmit()
@@ -42,6 +43,9 @@ const MnyMng = () => {
         setCalData(newData);
     };
 
+    const copyToClipBoard = () => {
+
+    }
     return (
         <div className="container m-auto">
             <div className="bg-white border shadow-md p-4 my-3 font-mono">
@@ -142,11 +146,24 @@ const MnyMng = () => {
                                         <tbody class="border bg-sky-50">
                                             {calData.map((data, index) => (
                                                 <tr className="border" key={index}>
-                                                    <td class="pl-4 border">
+                                                    <td class="pl-4 border w-[200px]">
                                                         {index + 1}
                                                     </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        ₹{(data.amount).toFixed(0)}
+                                                    <td
+                                                        className='px-6 py-4 whitespace-nowrap cursor-pointer w-50'
+                                                        onClick={() => {
+                                                            navigator.clipboard.writeText((data.amount).toFixed(0));
+                                                            setCopiedIndex(index);
+                                                            setTimeout(() => {
+                                                                setCopiedIndex(null);
+                                                            }, 2000);
+                                                        }}
+                                                        title="click to copy"
+                                                    >
+                                                        ₹ {(data.amount).toFixed(0)}
+                                                        <span className=" left-10 text-green-500">
+                                                            {copiedIndex === index ? ' 📋copied successfully' : ''}
+                                                        </span>
                                                     </td>
                                                 </tr>
                                             ))}
