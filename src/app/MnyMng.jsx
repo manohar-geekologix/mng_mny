@@ -43,14 +43,11 @@ const MnyMng = () => {
         setCalData(newData);
     };
 
-    const copyToClipBoard = () => {
-
-    }
     return (
         <div className="container m-auto">
-            <div className="bg-white border shadow-md p-4 my-3 font-mono">
+            <div className=" border shadow-md p-4 my-3 font-mono">
                 <div className="flex flex-col md:flex-row justify-between items-end gap-3">
-                    <div className="flex flex-col w-full">
+                    <div className="w-full">
                         <label
                             htmlFor="start_amount"
                             className="block text-grey-darker text-md font-bold mb-1"
@@ -66,7 +63,7 @@ const MnyMng = () => {
                             onChange={(e) => handleChange(e)}
                         />
                     </div>
-                    <div className="flex flex-col w-full">
+                    <div className="w-full">
                         <label
                             htmlFor="percent"
                             className="block text-grey-darker text-md font-bold mb-1"
@@ -82,7 +79,7 @@ const MnyMng = () => {
                             onChange={(e) => handleChange(e)}
                         />
                     </div>
-                    <div className="flex flex-col w-full">
+                    <div className="w-full">
                         <label
                             htmlFor="step"
                             className="block text-grey-darker text-md font-bold mb-1"
@@ -98,7 +95,7 @@ const MnyMng = () => {
                             onChange={(e) => handleChange(e)}
                         />
                     </div>
-                    <div className="flex flex-col w-full">
+                    <div className="w-full">
                         <label
                             htmlFor="profit_percent"
                             className="block text-grey-darker text-md font-bold mb-1"
@@ -126,7 +123,7 @@ const MnyMng = () => {
             </div>
             {
                 calData.length > 0 &&
-                <div className="bg-white border shadow-md p-4 my-3 mt-[35px] font-mono">
+                <div className=" border shadow-md p-4 my-3 mt-[35px] font-mono">
                     <h5>Result</h5>
                     <div class="flex flex-col mt-6">
                         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
