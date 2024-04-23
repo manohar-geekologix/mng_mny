@@ -131,7 +131,7 @@ const MnyMng = () => {
                     <div class="flex flex-col mt-6">
                         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                <div class="shadow-lg h-[550px] overflow-auto">
+                                <div class="shadow-lg h-[560px] overflow-auto">
                                     <table class="min-w-full text-sm">
                                         <thead class="bg-cyan-950 text-xs uppercase font-medium border border-slate-400">
                                             <tr>
