@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react"
 const MnyMng = () => {
     const initValue = {
         start_amount: 100,
-        percent: 85,
+        percent: 87,
         step: 10,
         profit_percent: 0,
         totalUsed: 0,
@@ -115,7 +115,7 @@ const MnyMng = () => {
                             onChange={(e) => handleChange(e)}
                         />
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex items-center gap-2">
                         <button className=" bg-green-700 py-2 px-3 rounded-lg font-medium" onClick={handleSubmit}>
                             Save
                         </button>
