@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react"
 
 const MnyMng = () => {
     const initValue = {
-        start_amount: 100,
+        start_amount: 120,
         percent: 87,
         step: 10,
-        profit_percent: 0,
+        profit_percent: 20,
         totalUsed: 0,
         totalLoss: 0,
     };
@@ -47,9 +47,8 @@ const MnyMng = () => {
     };
 
     return (
-        <div className="grid grid-cols-12 content-center justify-center h-screen bg-slate-800 text-slate-200">
-            <div className="col-span-3"></div>
-            <div className="col-span-2 p-4 my-3 font-mono pt-16 border border-slate-400 bg-cyan-950 rounded-bl-xl rounded-tl-xl">
+        <div className="flex items-stretch content-center justify-center h-screen bg-slate-800 text-slate-200">
+            <div className="p-4 my-3 font-mono pt-16 border border-slate-400 bg-cyan-950 rounded-bl-xl rounded-tl-xl">
                 <div className="flex flex-col gap-3">
                     <div className="w-full">
                         <label
@@ -72,7 +71,7 @@ const MnyMng = () => {
                             htmlFor="percent"
                             className="block text-grey-darker text-md font-bold mb-1"
                         >
-                           Return Percent
+                            Return Percent
                         </label>
                         <input
                             type="number"
@@ -127,57 +126,49 @@ const MnyMng = () => {
             </div>
             {
                 calData.length > 0 &&
-                <div className="col-span-4 p-4 my-3 font-mono border border-slate-400 bg-slate-800 rounded-br-xl rounded-tr-xl">
-                    <div class="flex flex-col mt-6">
-                        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                <div class="shadow-lg h-[560px] overflow-auto">
-                                    <table class="min-w-full text-sm">
-                                        <thead class="bg-cyan-950 text-xs uppercase font-medium border border-slate-400">
-                                            <tr>
-                                                <th scope="col" class="px-6 py-3 text-left tracking-wider border border-slate-400">
-                                                    Step
-                                                </th>
-                                                <th scope="col" class="px-6 py-3 text-left tracking-wider border border-slate-400">
-                                                    next amount
-                                                </th>
-                                                <th scope="col" class="px-6 py-3 text-left tracking-wider">
-                                                    require amount
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="border border-slate-400 bg-cyan-900">
-                                            {calData.map((data, index) => (
-                                                <tr className="border border-slate-400" key={index}>
-                                                    <td class="pl-4 border border-slate-400 w-[200px]">
-                                                        {index + 1}
-                                                    </td>
-                                                    <td
-                                                        className="px-6 py-4 whitespace-nowrap cursor-pointer w-50 border border-slate-400 w-[200px]"
-                                                        title="click to copy"
-                                                        onClick={() => {
-                                                            navigator.clipboard.writeText((data.amount).toFixed(0));
-                                                            setCopiedIndex(index);
-                                                            setTimeout(() => {
-                                                                setCopiedIndex(null);
-                                                            }, 1000);
-                                                        }}>
-                                                        ₹ {(data.amount).toFixed(0)}
-                                                        <span className="left-10 text-green-500">
-                                                            {copiedIndex === index ? ' 📋copied!' : ''}
-                                                        </span>
-                                                    </td>
-                                                    <td className="px-6 py-4 whitespace-nowrap w-50">
-                                                        ₹ {(data.usedAmount).toFixed(0)}
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div className="p-3 my-3 font-mono border border-slate-400 bg-slate-800 rounded-br-xl rounded-tr-xl overflow-y-auto">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-cyan-950 text-xs uppercase font-medium border border-slate-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left tracking-wider border border-slate-400">
+                                    Step
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left tracking-wider border border-slate-400">
+                                    next amount
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left tracking-wider">
+                                    require amount
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="border border-slate-400 bg-cyan-900">
+                            {calData.map((data, index) => (
+                                <tr className="border border-slate-400" key={index}>
+                                    <td class="pl-4 border border-slate-400 w-[200px]">
+                                        {index + 1}
+                                    </td>
+                                    <td
+                                        className="px-6 py-4 whitespace-nowrap cursor-pointer w-50 border border-slate-400 w-[200px]"
+                                        title="click to copy"
+                                        onClick={() => {
+                                            navigator.clipboard.writeText((data.amount).toFixed(0));
+                                            setCopiedIndex(index);
+                                            setTimeout(() => {
+                                                setCopiedIndex(null);
+                                            }, 1000);
+                                        }}>
+                                        ₹ {(data.amount).toFixed(0)}
+                                        <span className="left-10 text-green-500">
+                                            {copiedIndex === index ? ' 📋copied!' : ''}
+                                        </span>
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap w-50">
+                                        ₹ {(data.usedAmount).toFixed(0)}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             }
         </div>
