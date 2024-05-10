@@ -6,7 +6,7 @@ const MnyMng = () => {
         start_amount: 120,
         percent: 87,
         step: 10,
-        profit_percent: 20,
+        profit_percent: 0,
         totalUsed: 0,
         totalLoss: 0,
     };
