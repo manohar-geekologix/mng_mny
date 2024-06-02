@@ -114,14 +114,12 @@ const MnyMng = () => {
                             onChange={(e) => handleChange(e)}
                         />
                     </div>
-                    <div className="flex items-center gap-2">
-                        <button className=" bg-green-700 py-2 px-3 rounded-lg font-medium" onClick={handleSubmit}>
-                            Save
-                        </button>
-                        <button className="bg-slate-500 py-2 px-3 rounded-lg font-medium" onClick={handleClear}>
-                            Clear
-                        </button>
-                    </div>
+                    <button className="w-100 block bg-green-700 py-2 px-3 rounded-lg font-medium" onClick={handleSubmit}>
+                        Save
+                    </button>
+                    <button className="w-100 block bg-slate-500 py-2 px-3 rounded-lg font-medium" onClick={handleClear}>
+                        Clear
+                    </button>
                 </div>
             </div>
             {
