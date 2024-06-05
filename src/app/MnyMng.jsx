@@ -11,9 +11,17 @@ const MnyMng = () => {
         totalLoss: 0,
         total_amount: 0
     };
-    const [formValue, setFormValue] = useState(initValue);
+    const [formValue, setFormValue] = useState(() => {
+        const savedValues = localStorage.getItem("formValue");
+        return savedValues ? JSON.parse(savedValues) : initValue;
+    });
+
     const [calData, setCalData] = useState([]);
     const [copiedIndex, setCopiedIndex] = useState(null);
+
+    useEffect(() => {
+        localStorage.setItem("formValue", JSON.stringify(formValue));
+    }, [formValue]);
 
     useEffect(() => {
         handleSubmit();
@@ -31,7 +39,6 @@ const MnyMng = () => {
     const handleSubmit = () => {
         setCalData([]);
         let amount = parseFloat(formValue.start_amount);
-        console.log(amount, 'smt')
         let percent = parseFloat(formValue.percent);
         let step = parseFloat(formValue.step);
         let profit_percent = parseFloat(formValue.profit_percent);
@@ -43,16 +50,15 @@ const MnyMng = () => {
         for (let i = 0; i < step; i++) {
             totalLoss += amount;
             amount = ((profit_percent + 100) * totalLoss) / percent;
-            console.log(amount, 'sd')
             if (i == 0) {
-                totalUsed += amount + formValue.start_amount;
+                totalUsed += amount + parseFloat(formValue.start_amount);
             } else {
                 totalUsed += amount;
             }
             if (i == 0) {
-                total_amount = (total_amount - amount) - formValue.start_amount
+                total_amount = (total_amount - amount) - parseFloat(formValue.start_amount)
             } else {
-                total_amount = total_amount - amount
+                total_amount = (total_amount - amount)
             }
             newData.push({ step: i + 1, amount: amount, usedAmount: totalUsed, total_amount: total_amount });
         }
@@ -64,10 +70,10 @@ const MnyMng = () => {
     }
 
     return (
-        <div className="flex gap-3 items-stretch content-center justify-center h-screen bg-[#0f172a] text-slate-200 p-3">
+        <div className="flex md:flex-row flex-col gap-3 items-stretch content-center justify-center md:h-screen bg-[#0f172a] text-slate-200 p-3">
             <div className="rounded-lg bg-[#1e293b] p-4 shadow-lg">
                 <div className="flex flex-col gap-3">
-                    <div className="w-[250px]">
+                    <div className="w-full">
                         <label
                             htmlFor="start_amount"
                             className="block text-sm font-medium text-slate-300 pb-1"
@@ -157,19 +163,19 @@ const MnyMng = () => {
             </div>
             {calData.length > 0 &&
                 <div className="overflow-y-auto rounded-lg bg-[#1e293b] shadow-lg">
-                    <table class="min-w-full text-sm text-slate-300">
-                        <thead class="bg-[#334155] uppercase text-nowrap">
+                    <table className="min-w-full text-sm text-slate-300">
+                        <thead className="bg-[#334155] uppercase text-nowrap">
                             <tr>
-                                <th scope="col" class="p-4 w-[100px] text-start">
+                                <th scope="col" className="p-4 w-[100px] text-start">
                                     Step
                                 </th>
-                                <th scope="col" class="p-4 w-[200px] text-start">
+                                <th scope="col" className="p-4 w-[200px] text-start">
                                     next amount
                                 </th>
-                                <th scope="col" class="p-4 w-[200px] text-start">
+                                <th scope="col" className="p-4 w-[200px] text-start">
                                     require amount
                                 </th>
-                                <th scope="col" class="p-4 w-[200px] text-start">
+                                <th scope="col" className="p-4 w-[200px] text-start">
                                     Remaining amount
                                 </th>
                             </tr>
@@ -177,13 +183,25 @@ const MnyMng = () => {
                         <tbody>
                             <tr className="border-b border-slate-700">
                                 <td className="p-4">1</td>
-                                <td className="p-4 whitespace-nowrap cursor-pointer">₹ {formValue.start_amount}</td>
+                                <td className="p-4 whitespace-nowrap cursor-pointer"
+                                    onClick={() => {
+                                        navigator.clipboard.writeText(formValue.start_amount);
+                                        setCopiedIndex(10001);
+                                        setTimeout(() => {
+                                            setCopiedIndex(null);
+                                        }, 1000);
+                                    }}
+                                >₹ {formValue.start_amount}
+                                    <span className="left-10 text-green-500">
+                                        {copiedIndex === 10001 ? ' 📋copied!' : ''}
+                                    </span>
+                                </td>
                                 <td className="p-4">₹ {formValue.start_amount}</td>
                                 <td className="p-4">{showPositiveOrZero(formValue.total_amount - formValue.start_amount)}</td>
                             </tr>
                             {calData.map((data, index) => (
                                 <tr className="border-b border-slate-700" key={index}>
-                                    <td class="p-4">
+                                    <td className="p-4">
                                         {index + 2}
                                     </td>
                                     <td
@@ -202,7 +220,7 @@ const MnyMng = () => {
                                         </span>
                                     </td>
                                     <td className="p-4 whitespace-nowrap">
-                                        ₹ {(data.usedAmount).toFixed(0)}
+                                        ₹ {Number(data.usedAmount).toFixed(0)}
                                     </td>
                                     <td className="p-4 whitespace-nowrap">
                                         {showPositiveOrZero(data.total_amount)?.toFixed(0)}
